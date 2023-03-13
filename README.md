@@ -1,6 +1,9 @@
 # cfp-go-template
 
-A template for creating CF Pages project with Go support for writing edge functions/workers.
+A template for creating CF Pages project with Go support for writing edge functions.
+
+> Derived from [syumai's](https://github.com/syumai/worker-template-tinygo) tinygo worker template,
+but for cf pages/functions.
 
 ### Quick setup
 
