@@ -1,28 +1,27 @@
-# Cloudflare pages template for Golang.
+# cfp-go-template
 
-I use this personally for building MVPs and JAMstack projects.
+A template for creating CF Pages project with Go support for writing edge functions/workers.
 
-### Quick Setup
+### Quick setup
 
-    - Clone the repo
+1. **Make sure you have the following installed**
 
-    - Run `go mod init <module name>`, and then `go mod tidy`
+    - Wrangler CLI
 
-    - Run `make dev` to start the wrangler pages local server
+    - Go
 
-### Development
+2. **Git clone this repo**
 
-**Static\***
+3. **Set up dev environment**
 
-The **`www/`** folder will be the entry point for static files. You can
-still create a `react` project inside this folder and just make sure
-that you set **`www/`** as the build target.
+    - Run `go mod init <mode name>` followed by `go mod tidy`.
 
-**Workers/Functions**
+    - Add project-related dotfiles such as `.editorconfig`.
 
-The `main.go` will be the entry point for all the your back-end code.
+    - Check out the `main.go` file and start coding!
 
-### Resources
-
-    - [Cloudflare Pages](https://pages.cloudflare.com/)
-    - [Golang](https://go.dev)
+    - To test out your code, run a local wrangler server using `make dev`
+      > 
+      > **Note**
+      > 
+      > You need to restart the server everytime you make changes.
