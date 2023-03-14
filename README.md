@@ -2,8 +2,7 @@
 
 <img src="https://pages.cloudflare.com/resources/logo/logo.svg" width="100" /><img src="https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo_Blue.png" width="130" />
 
-A template for creating CFPages project and using Go for edge functions/workers. This template is derived from [syumai's](https://github.com/syumai/worker-template-tinygo) tinygo worker template,
-but for CFPages functions and using regular `go`.
+This is a template for creating Cloudflare Pages project and implementing edge functions/workers using Go. It is based on [syumai's](https://github.com/syumai/worker-template-tinygo) tinygo worker template but adapted for Cloudflare Pages functions and using standard Go.
 
 &nbsp;
 
