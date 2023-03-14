@@ -14,17 +14,20 @@ const load = WebAssembly.instantiate(api, go.importObject).then((instance) => {
 });
 
 export async function onRequest(ctx) {
-  // serve static first
-  const url = new URL(ctx.request.url);
-  if (!url.pathname.startsWith("/api")) {
-    return ctx.env.ASSETS.fetch(ctx.request);
-  }
+  // Serve static files first
+  const res = await ctx.env.ASSETS.fetch(ctx.request);
+  if (res.status !== 404) return res;
 
-  // then api
+  // and then fallback to go handlers
   try {
     await load;
     await readyPromise;
+
     const resp = await handleRequest(ctx.request, { env: ctx.env, ctx });
+
+    // if backend returns 404, then serve the static 404 page
+    if (resp.status === 404) return ctx.env.ASSETS.fetch(ctx.request);
+
     return Response.json(await resp.json(), {
       status: resp.status,
     });
