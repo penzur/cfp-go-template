@@ -1,15 +1,14 @@
 # cfp-go-template
 
-<img src="https://pages.cloudflare.com/resources/logo/logo.svg" width="100" />
-<img src="https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo_Blue.png" width="130" />
+<img src="https://pages.cloudflare.com/resources/logo/logo.svg" width="100" /><img src="https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo_Blue.png" width="130" />
 
-A template for creating CF Pages project with Go support for writing edge functions.
-
-> Derived from [syumai's](https://github.com/syumai/worker-template-tinygo) tinygo worker template,
-but for cf pages/functions and using regular `go`.
+A template for creating CFPages project and using Go for edge functions/workers. This template is derived from [syumai's](https://github.com/syumai/worker-template-tinygo) tinygo worker template,
+but for CFPages functions and using regular `go`.
 
 &nbsp;
+
 ### Quick setup
+&nbsp; 
 
 1. **Make sure you have the following installed**
 
@@ -34,31 +33,36 @@ but for cf pages/functions and using regular `go`.
    - Run `mak dev` to start the live reload server.
 
 &nbsp;   
-### Dev time!
+
+### Develop
+&nbsp; 
 
 **THE CLIENT**
 
 The `www/` folder will be mounted and served when you start the local server. So if you're using a bloatware of some sort (*\*cough React\**), make sure to set your build target to this folder. Otherwise, you're gonna have to change the target folder inside the `Makefile` `:serve` action.
 
+&nbsp;
 
 **THE BACKEND**
 
 The `functions/` folder is the entry point to your edge functions/workers. So whatever folders or javascript files you put in there will be [treated as a route](https://developers.cloudflare.com/pages/platform/functions/routing/).
 
-Inside the `functions/` folder is a middleware that will route all requests that start with `/api` to the `wasm` binary. So make sure that all you `go` handlers' target path starts with `/api` like so:
+Inside the `functions/` folder is a middleware that will route all requests that start with `/api` to the `wasm` binary. So make sure that all your `go` handlers' path starts with `/api`.
+
 
 ```go
-
-	http.HandleFunc("/api/hello", func(w http.ResponseWriter, r *http.Request) {
-		json.
-			NewEncoder(w).
-			Encode(map[string]string{"message": "hello"})
-	})
+http.HandleFunc("/api/hello", func(w http.ResponseWriter, r *http.Request) {
+	json.
+	NewEncoder(w).
+	Encode(map[string]string{"message": "hello"})
+})
 	
-
 ```
 &nbsp;
 
 ### Deployment
 
-> soon...
+[Check out the docs](https://developers.cloudflare.com/pages/get-started/)
+
+&nbsp;
+
