@@ -1,6 +1,6 @@
-import '../helpers/polyfill_performance.js';
-import '../helpers/wasm_exec_go.js';
-import api from '../api.wasm';
+import "../helpers/polyfill_performance.js";
+import "../helpers/wasm_exec_go.js";
+import api from "../api.wasm";
 
 const go = new Go();
 
@@ -14,6 +14,13 @@ const load = WebAssembly.instantiate(api, go.importObject).then((instance) => {
 });
 
 export async function onRequest(ctx) {
+  // serve static first
+  const url = new URL(ctx.request.url);
+  if (!url.pathname.startsWith("/api")) {
+    return ctx.env.ASSETS.fetch(ctx.request);
+  }
+
+  // then api
   try {
     await load;
     await readyPromise;
@@ -22,6 +29,6 @@ export async function onRequest(ctx) {
       status: resp.status,
     });
   } catch (_) {
-    return new Response('Bad request', { status: 400 });
+    return new Response("Bad request", { status: 400 });
   }
 }

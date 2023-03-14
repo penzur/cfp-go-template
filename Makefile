@@ -9,8 +9,6 @@ serve: build
 build:
 	@killall node
 	@sleep 2
-	@rm -rf ./api.wasm
-	#@tinygo build -o ./api.wasm -target wasm ./...
 	GOOS=js GOARCH=wasm go build -o ./api.wasm  ./...
 
 .PHONY: dev
