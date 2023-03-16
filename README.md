@@ -2,7 +2,7 @@
 
 <img src="https://pages.cloudflare.com/resources/logo/logo.svg" width="100" /><img src="https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo_Blue.png" width="130" />
 
-This is a template for creating Cloudflare Pages project and implementing edge functions/workers using Go. It is based on [syumai's](https://github.com/syumai/worker-template-tinygo) tinygo worker template but adapted for Cloudflare Pages functions and using standard Go.
+This is a template for creating Cloudflare Pages project and using `Go` for the edge functions/workers. It is based on [syumai's](https://github.com/syumai/worker-template-tinygo) `tinygo` worker template but adapted for Cloudflare Pages functions and using standard Go.
 
 &nbsp;
 
@@ -15,7 +15,10 @@ This is a template for creating Cloudflare Pages project and implementing edge f
 
    - [Go](https://go.dev)
 
-   - [Air](https://github.com/cosmtrek/air) - live reload
+   - [NodeJS](https://nodejs.org)
+
+   - [Air](https://github.com/cosmtrek/air)
+   
 
 2. **Grab a copy of this repo**
 
@@ -29,37 +32,33 @@ This is a template for creating Cloudflare Pages project and implementing edge f
 
    - Add project-related dotfiles such as `.editorconfig` etc.
 
-   - Run `mak dev` to start the live reload server.
+   - Run `make dev` to start the live reload server.
 
 &nbsp;   
 
-### Develop
+### Development
 &nbsp; 
 
-**THE CLIENT**
+**Static files**
 
-The `www/` folder will be mounted and served when you start the local server. So if you're using a bloatware of some sort (*\*cough React\**), make sure to set your build target to this folder. Otherwise, you're gonna have to change the target folder inside the `Makefile` `:serve` action.
-
+Inside the `www/` folder are static assets that will be mounted and served when you start the local server. Make sure to set this folder as the build target for your client-side framework as well.
+ 
 &nbsp;
 
-**THE BACKEND**
+**Backend**
 
-The `functions/` folder is the entry point to your edge functions/workers. So whatever folders or javascript files you put in there will be [treated as a route](https://developers.cloudflare.com/pages/platform/functions/routing/).
+The `functions/` directory is your js/ts workers' entry point. You most likely don't need to edit anything in this folder since it's been set up to route all non-static requests to the bundled `wasm` module.
 
-Inside the `functions/` folder is a middleware that will route all requests that start with `/api` to the `wasm` binary. So make sure that all your `go` handlers' path starts with `/api`.
+The **`main.go`** should be the entry point to your back-end logic. And have the rest of your `go` code inside the **`src/`** folder.
 
+	├── main.go
+	├── src/
 
-```go
-http.HandleFunc("/api/hello", func(w http.ResponseWriter, r *http.Request) {
-	json.
-	NewEncoder(w).
-	Encode(map[string]string{"message": "hello"})
-})
-	
-```
 &nbsp;
 
 ### Deployment
+
+Push your code to `GitHub` or `Gitlab` and follow the instruction link below on how to set up auto-deploy for your project.
 
 [Check out the docs](https://developers.cloudflare.com/pages/get-started/)
 
